@@ -7,6 +7,10 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 const updateClipboardStorage = content => {
+  if (!content || content.trim() === "") {
+    return;
+  }
+
   chrome.storage.sync.get("clipboard", data => {
     const index = data.clipboard.indexOf(content);
 
