@@ -1,7 +1,8 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({
-    clipboard: ['Thanks for using Jurojin!'],
+    clipboard: ["Thanks for using Jurojin!"],
     clipboardSync: "browser",
+    latestElement: "Thanks for using Jurojin!",
     intervalId: null
   });
 });
@@ -24,8 +25,11 @@ const updateClipboardStorage = content => {
     return;
   }
 
-  chrome.storage.sync.get("clipboard", data => {
+  chrome.storage.sync.get(["clipboard", "latestElement"], data => {
     const index = data.clipboard.indexOf(content);
+    if (data.latestElement === content) {
+      return;
+    }
 
     const clipboard =
       index !== -1
@@ -37,7 +41,8 @@ const updateClipboardStorage = content => {
         : [content, ...data.clipboard];
 
     chrome.storage.sync.set({
-      clipboard
+      clipboard,
+      latestElement: content
     });
   });
 };

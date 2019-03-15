@@ -1,8 +1,8 @@
 window.onload = () => {
   chrome.storage.sync.get("clipboard", data => {
     let selectionList = document.getElementById("selectionList");
-    data.clipboard.forEach((element, index) => {
-      let entry = generateListElement(selectionList, element, index);
+    data.clipboard.forEach(element => {
+      let entry = generateListElement(selectionList, element);
       selectionList.appendChild(entry);
     });
   });
@@ -11,11 +11,10 @@ window.onload = () => {
   settingsIcon.onclick = () => chrome.runtime.openOptionsPage();
 };
 
-const generateListElement = (selectionList, text, index) => {
+const generateListElement = (selectionList, text) => {
   let li = document.createElement("li");
   li.appendChild(generateListElementParagraph(text));
-  if (index !== 0)
-    li.appendChild(generateListElementCloseIcon(selectionList, text));
+  li.appendChild(generateListElementCloseIcon(selectionList, text));
 
   return li;
 };

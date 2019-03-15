@@ -1,4 +1,4 @@
-document.addEventListener("copy", e =>
+document.addEventListener("copy", () =>
   chrome.storage.sync.get("clipboardSync", data => {
     if (data.clipboardSync === "browser") {
       chrome.runtime.sendMessage({
