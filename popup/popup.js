@@ -6,6 +6,9 @@ window.onload = () => {
       selectionList.appendChild(entry);
     });
   });
+
+  let settingsIcon = document.getElementById("settings");
+  settingsIcon.onclick = () => chrome.runtime.openOptionsPage();
 };
 
 const generateListElement = (selectionList, text, index) => {

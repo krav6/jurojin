@@ -53,3 +53,11 @@ i {
 i:hover {
   transform: scale(1.3);
 }
+
+.menuDiv {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

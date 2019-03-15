@@ -43,7 +43,7 @@ const getContentFromClipboard = () => {
 const handleOptionsChanged = options => {
   chrome.storage.sync.get("intervalId", data => {
     if (options.clipboardSync == "system" && !data.intervalId) {
-      const intervalId = setInterval(getContentFromClipboard, 1000);
+      const intervalId = setInterval(getContentFromClipboard, 500);
       chrome.storage.sync.set({
         intervalId
       });
@@ -58,7 +58,7 @@ const handleOptionsChanged = options => {
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   switch (sender.url) {
-    case `chrome-extension://${chrome.runtime.id}/options.html`:
+    case `chrome-extension://${chrome.runtime.id}/options/options.html`:
       handleOptionsChanged(msg);
       break;
     default:
