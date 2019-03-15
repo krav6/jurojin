@@ -1,9 +1,22 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({
-    clipboard: [],
+    clipboard: ['Thanks for using Jurojin!'],
     clipboardSync: "browser",
     intervalId: null
   });
+});
+
+chrome.commands.onCommand.addListener(command => {
+  switch (command) {
+    case "toogle-tab":
+      //TODO Switch it with a proper browserAction when Chrome decides to support it.
+      //https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/browserAction/openPopup
+      chrome.tabs.create({ url: "popup/popup.html" });
+      break;
+
+    default:
+      break;
+  }
 });
 
 const updateClipboardStorage = content => {
@@ -14,16 +27,14 @@ const updateClipboardStorage = content => {
   chrome.storage.sync.get("clipboard", data => {
     const index = data.clipboard.indexOf(content);
 
-    let clipboard;
-    if (index !== -1) {
-      clipboard = [
-        content,
-        ...data.clipboard.slice(0, index),
-        ...data.clipboard.slice(index + 1, data.clipboard.length)
-      ];
-    } else {
-      clipboard = [content, ...data.clipboard];
-    }
+    const clipboard =
+      index !== -1
+        ? [
+            content,
+            ...data.clipboard.slice(0, index),
+            ...data.clipboard.slice(index + 1, data.clipboard.length)
+          ]
+        : [content, ...data.clipboard];
 
     chrome.storage.sync.set({
       clipboard

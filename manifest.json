@@ -7,6 +7,21 @@
     "default_popup": "popup/popup.html",
     "default_icon": "icons/icon-32.png"
   },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Toggle clipboard manager popup from the browser"
+    },
+    "toogle-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Toggle clipboard manager tab globally",
+      "global": true
+    }
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
