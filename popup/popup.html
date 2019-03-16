@@ -14,8 +14,18 @@
     />
   </head>
   <body>
-    <div id="menu" class="menuDiv">
-      <i id="settings" class="fas fa-cog fa-lg"></i>
+    <div id="menu" class="menu">
+      <div id="leftMenu" class="menu-segment menu-segment-left">
+        <i
+          id="scrollToTop"
+          class="fas fa-arrow-up fa-lg"
+          title="Scroll to top"
+        ></i>
+      </div>
+      <div id="centerMenu" class="menu-segment menu-segment-center">
+        <i id="settings" class="fas fa-cog fa-lg" title="Options"></i>
+      </div>
+      <div id="rightMenu" class="menu-segment menu-segment-right"></div>
     </div>
     <ul id="selectionList"></ul>
     <script src="popup.js"></script>
