@@ -123,7 +123,8 @@ const bumpElementToTheTopOfTheList = (selectionList, element) => {
         element.textContent,
         ...data.clipboard.slice(0, index),
         ...data.clipboard.slice(index + 1, data.clipboard.length)
-      ]
+      ],
+      latestElement: element.textContent
     });
   });
 };
