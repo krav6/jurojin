@@ -20,16 +20,21 @@ li {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  opacity: 1;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  -webkit-transition: box-shadow 0.5s;
-  -moz-transition: box-shadow 0.5s;
-  -o-transition: box-shadow 0.5s;
-  transition: box-shadow 0.5s;
+  -webkit-transition: box-shadow 0.5s, opacity 0.3s;
+  -moz-transition: box-shadow 0.5s, opacity 0.3s;
+  -o-transition: box-shadow 0.5s, opacity 0.3s;
+  transition: box-shadow 0.5s, opacity 0.3s;
 }
 
 li:hover {
   box-shadow: 0px 0px 10px 2px #d1d1d1;
   background-color: #fafafa;
+}
+
+li.deleted {
+  opacity: 0;
 }
 
 p {
@@ -91,4 +96,16 @@ i:hover {
   transition-timing-function: ease-out;
   transform: translateX(0);
   opacity: 1;
+}
+
+.number {
+  padding: 5px;
+  margin: 5px;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
