@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.commands.onCommand.addListener(command => {
   switch (command) {
-    case "toogle-tab":
+    case "toggle-tab":
       //TODO Switch it with a proper browserAction when Chrome decides to support it.
       //https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/browserAction/openPopup
       chrome.tabs.create({ url: "popup/popup.html" });

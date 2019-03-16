@@ -14,7 +14,7 @@
       },
       "description": "Toggle clipboard manager popup from the browser"
     },
-    "toogle-tab": {
+    "toggle-tab": {
       "suggested_key": {
         "default": "Ctrl+Shift+1"
       },
