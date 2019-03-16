@@ -13,13 +13,6 @@
         "default": "Ctrl+Shift+A"
       },
       "description": "Toggle clipboard manager popup from the browser"
-    },
-    "toggle-tab": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+1"
-      },
-      "description": "Toggle clipboard manager tab globally",
-      "global": true
     }
   },
   "content_scripts": [
