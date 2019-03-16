@@ -19,7 +19,6 @@ li {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
   opacity: 1;
   transform: translateY(0);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -45,6 +44,8 @@ li.bump-deleted {
 
 p {
   width: 300px;
+  margin: 0px;
+  padding: 10px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 5;
