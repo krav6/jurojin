@@ -1,6 +1,5 @@
-// Saves options to chrome.storage
 const saveOptions = () => {
-  var clipboardSync = document.getElementById("clipboardSync").value;
+  const clipboardSync = document.getElementById('clipboardSync').value;
   chrome.storage.sync.set({
     clipboardSync
   });
@@ -12,11 +11,11 @@ const saveOptions = () => {
 
 const restoreOptions = () => {
   chrome.storage.sync.get(
-    "clipboardSync",
+    'clipboardSync',
     data =>
-      (document.getElementById("clipboardSync").value = data.clipboardSync)
+      (document.getElementById('clipboardSync').value = data.clipboardSync)
   );
 };
 
-document.addEventListener("DOMContentLoaded", restoreOptions);
-document.getElementById("save").addEventListener("click", saveOptions);
+document.addEventListener('DOMContentLoaded', restoreOptions);
+document.getElementById('save').addEventListener('click', saveOptions);
