@@ -39,6 +39,12 @@ p {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 i {
