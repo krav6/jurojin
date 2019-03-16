@@ -69,7 +69,7 @@ i:hover {
   background-color: #bfffc8;
   border: 1px solid rgba(0, 0, 0, 0.06);
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(150%);
   transition-timing-function: ease-in;
   transition: 0.5s;
   -webkit-touch-callout: none;
