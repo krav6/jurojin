@@ -77,31 +77,6 @@ i:hover {
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-.notification {
-  position: absolute;
-  right: 15%;
-  padding: 5px;
-  background-color: #bfffc8;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  opacity: 0;
-  transform: translateX(150%);
-  transition-timing-function: ease-in;
-  transition: 0.5s;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.notification.visible {
-  transition: 0.5s;
-  transition-timing-function: ease-out;
-  transform: translateX(0);
-  opacity: 1;
-}
-
 .number {
   padding: 5px;
   margin: 5px;

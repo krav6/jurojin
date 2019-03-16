@@ -18,7 +18,6 @@ const generateListElement = (selectionList, text, index) => {
   li.appendChild(generateListElementNumber(index));
   li.appendChild(generateListElementParagraph(text));
   li.appendChild(generateListElementCloseIcon(selectionList, text));
-  li.appendChild(generateListElementNotification());
 
   return li;
 };
@@ -47,14 +46,6 @@ const generateListElementCloseIcon = (selectionList, text) => {
   return i;
 };
 
-const generateListElementNotification = () => {
-  const div = document.createElement('div');
-  div.classList.add('notification');
-  div.innerText = 'Copied to the clipboard!';
-
-  return div;
-};
-
 const handleKeyDown = (e, selectionList) => {
   const parsedKey = parseInt(e.key);
   if (
@@ -67,11 +58,9 @@ const handleKeyDown = (e, selectionList) => {
 };
 
 const writeToClipboard = targetNode => {
-  const notification = targetNode.parentNode.lastChild;
-  notification.classList.add('visible');
-  setTimeout(() => notification.classList.remove('visible'), 1000);
-
   navigator.clipboard.writeText(targetNode.textContent);
+  if (targetNode.parentNode.firstChild.innerText !== '1')
+    bumpElementToTheTopOfTheList(targetNode.parentNode.parentNode, targetNode);
 };
 
 const eraseItemFromSelectionList = (selectionList, e, text) => {
@@ -91,9 +80,44 @@ const eraseItemFromSelectionList = (selectionList, e, text) => {
   });
 };
 
+const bumpElementToTheTopOfTheList = (selectionList, element) => {
+  element.parentNode.classList.add('deleted');
+  setTimeout(
+    () =>
+      removeAndAddElementAndUpdateNumbers(
+        selectionList,
+        element.parentNode,
+        generateListElement(selectionList, element.textContent, 0)
+      ),
+    300
+  );
+  chrome.storage.sync.get('clipboard', data => {
+    const index = data.clipboard.indexOf(element.textContent);
+    chrome.storage.sync.set({
+      clipboard: [
+        element.textContent,
+        ...data.clipboard.slice(0, index),
+        ...data.clipboard.slice(index + 1, data.clipboard.length)
+      ]
+    });
+  });
+};
+
 const removeElementAndUpdateNumbers = (selectionList, element) => {
   selectionList.removeChild(element);
   selectionList.childNodes.forEach(
-    (element, index) => (element.childNodes[0].innerText = index + 1)
+    (element, index) => (element.firstChild.innerText = index + 1)
+  );
+};
+
+const removeAndAddElementAndUpdateNumbers = (
+  selectionList,
+  elementToRemove,
+  elementToAdd
+) => {
+  selectionList.removeChild(elementToRemove);
+  selectionList.prepend(elementToAdd);
+  selectionList.childNodes.forEach(
+    (element, index) => (element.firstChild.innerText = index + 1)
   );
 };
