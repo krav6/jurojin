@@ -15,6 +15,7 @@ const generateListElement = (selectionList, text) => {
   const li = document.createElement('li');
   li.appendChild(generateListElementParagraph(text));
   li.appendChild(generateListElementCloseIcon(selectionList, text));
+  li.appendChild(generateListElementNotification());
 
   return li;
 };
@@ -35,8 +36,21 @@ const generateListElementCloseIcon = (selectionList, text) => {
   return i;
 };
 
-const writeToClipboard = e =>
+const generateListElementNotification = () => {
+  const div = document.createElement('div');
+  div.classList.add('notification');
+  div.innerText = 'Copied to the clipboard!';
+
+  return div;
+};
+
+const writeToClipboard = e => {
+  const notification = e.target.parentNode.childNodes[2];
+  notification.classList.add('visible');
+  setTimeout(() => notification.classList.remove('visible'), 1000);
+
   navigator.clipboard.writeText(e.target.textContent);
+};
 
 const eraseItemFromSelectionList = (selectionList, e, text) => {
   selectionList.removeChild(e.target.parentNode);
