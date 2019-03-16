@@ -57,6 +57,7 @@ p {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 i {
@@ -110,7 +111,6 @@ i:hover {
 .number {
   padding: 5px;
   margin: 5px;
-  border-right: 1px solid rgba(0, 0, 0, 0.06);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
