@@ -65,13 +65,30 @@ const handleKeyDown = (e, selectionList) => {
   }
 };
 
+const isTargetBeingDeleted = selectionList =>
+  Array.prototype.slice
+    .call(selectionList.childNodes)
+    .some(
+      element =>
+        element.classList.contains('deleted') ||
+        element.classList.contains('bump-deleted')
+    );
+
 const writeToClipboard = targetNode => {
+  if (isTargetBeingDeleted(targetNode.parentNode.parentNode)) {
+    return;
+  }
+
   navigator.clipboard.writeText(targetNode.textContent);
   if (targetNode.parentNode.firstChild.innerText !== '1')
     bumpElementToTheTopOfTheList(targetNode.parentNode.parentNode, targetNode);
 };
 
 const eraseItemFromSelectionList = (selectionList, e, text) => {
+  if (isTargetBeingDeleted(e.target.parentNode.parentNode)) {
+    return;
+  }
+
   e.target.parentNode.classList.add('deleted');
   setTimeout(
     () => removeElementAndUpdateNumbers(selectionList, e.target.parentNode),
