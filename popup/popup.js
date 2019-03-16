@@ -81,7 +81,7 @@ const eraseItemFromSelectionList = (selectionList, e, text) => {
 };
 
 const bumpElementToTheTopOfTheList = (selectionList, element) => {
-  element.parentNode.classList.add('deleted');
+  element.parentNode.classList.add('bump-deleted');
   setTimeout(
     () =>
       removeAndAddElementAndUpdateNumbers(
