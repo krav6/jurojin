@@ -96,11 +96,13 @@ const eraseItemFromSelectionList = (selectionList, e, text) => {
   );
   chrome.storage.sync.get('clipboard', data => {
     const index = data.clipboard.indexOf(text);
-    chrome.storage.sync.set({
-      clipboard: [
-        ...data.clipboard.slice(0, index),
-        ...data.clipboard.slice(index + 1, data.clipboard.length)
-      ]
+    chrome.runtime.sendMessage({
+      dataToSync: {
+        clipboard: [
+          ...data.clipboard.slice(0, index),
+          ...data.clipboard.slice(index + 1, data.clipboard.length)
+        ]
+      }
     });
   });
 };
@@ -118,13 +120,15 @@ const bumpElementToTheTopOfTheList = (selectionList, element) => {
   );
   chrome.storage.sync.get('clipboard', data => {
     const index = data.clipboard.indexOf(element.textContent);
-    chrome.storage.sync.set({
-      clipboard: [
-        element.textContent,
-        ...data.clipboard.slice(0, index),
-        ...data.clipboard.slice(index + 1, data.clipboard.length)
-      ],
-      latestElement: element.textContent
+    chrome.runtime.sendMessage({
+      dataToSync: {
+        clipboard: [
+          element.textContent,
+          ...data.clipboard.slice(0, index),
+          ...data.clipboard.slice(index + 1, data.clipboard.length)
+        ],
+        latestElement: element.textContent
+      }
     });
   });
 };

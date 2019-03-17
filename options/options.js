@@ -1,8 +1,5 @@
 const saveOptions = () => {
   const clipboardSync = document.getElementById('clipboardSync').value;
-  chrome.storage.sync.set({
-    clipboardSync
-  });
 
   chrome.runtime.sendMessage({
     clipboardSync

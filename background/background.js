@@ -1,6 +1,10 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({
-    clipboard: ['Thanks for using Jurojin!'],
+    clipboard: [
+      'Thanks for using Jurojin!',
+      'Press Ctrl+Shift+A (or Command+Shift+A on a Mac) to toggle this window.',
+      'Click on a list element or press the 1-9 keys to copy it to the clipboard.'
+    ],
     clipboardSync: 'browser',
     latestElement: 'Thanks for using Jurojin!',
     intervalId: null
@@ -44,25 +48,37 @@ const getContentFromClipboard = () => {
 };
 
 const handleOptionsChanged = options => {
-  chrome.storage.sync.get('intervalId', data => {
-    if (options.clipboardSync == 'system' && !data.intervalId) {
-      const intervalId = setInterval(getContentFromClipboard, 500);
-      chrome.storage.sync.set({
-        intervalId
-      });
-    } else if (options.clipboardSync == 'browser' && data.intervalId) {
-      clearInterval(data.intervalId);
-      chrome.storage.sync.set({
-        intervalId: null
+  chrome.storage.sync.set(
+    {
+      clipboardSync: options.clipboardSync
+    },
+    () => {
+      chrome.storage.sync.get('intervalId', data => {
+        if (options.clipboardSync == 'system' && !data.intervalId) {
+          const intervalId = setInterval(getContentFromClipboard, 500);
+          chrome.storage.sync.set({
+            intervalId
+          });
+        } else if (options.clipboardSync == 'browser' && data.intervalId) {
+          clearInterval(data.intervalId);
+          chrome.storage.sync.set({
+            intervalId: null
+          });
+        }
       });
     }
-  });
+  );
 };
+
+const handleSyncRequest = msg => chrome.storage.sync.set(msg.dataToSync);
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   switch (sender.url) {
     case `chrome-extension://${chrome.runtime.id}/options/options.html`:
       handleOptionsChanged(msg);
+      break;
+    case `chrome-extension://${chrome.runtime.id}/popup/popup.html`:
+      handleSyncRequest(msg);
       break;
     default:
       updateClipboardStorage(msg.selection);
