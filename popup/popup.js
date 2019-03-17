@@ -48,7 +48,7 @@ const generateListElementParagraph = text => {
 
 const generateListElementCloseIcon = (selectionList, text) => {
   const i = document.createElement('i');
-  i.classList.add('fas', 'fa-times', 'fa-lg');
+  i.classList.add('fas', 'fa-times', 'fa-lg', 'clickable');
   i.onclick = e => eraseItemFromSelectionList(selectionList, e, text);
 
   return i;
@@ -74,14 +74,58 @@ const isTargetBeingDeleted = selectionList =>
         element.classList.contains('bump-deleted')
     );
 
+const clearStatus = () => {
+  const statusBar = document.getElementById('statusBar');
+
+  while (statusBar.firstChild) {
+    statusBar.firstChild.remove();
+  }
+
+  statusBar.classList.remove('fade');
+};
+
+const setProcessingStatus = msg => {
+  clearStatus();
+
+  const spinnerIcon = document.createElement('i');
+  spinnerIcon.classList.add(
+    'fas',
+    'fa-spinner',
+    'fa-lg',
+    'status-icon',
+    'spinner'
+  );
+
+  const statusBar = document.getElementById('statusBar');
+  statusBar.innerText = msg;
+  statusBar.prepend(spinnerIcon);
+};
+
+const setProcessCompleteStatus = msg => {
+  clearStatus();
+
+  const checkIcon = document.createElement('i');
+  checkIcon.classList.add('fas', 'fa-check', 'status-icon');
+
+  const statusBar = document.getElementById('statusBar');
+  statusBar.innerText = msg;
+  statusBar.prepend(checkIcon);
+
+  setTimeout(() => statusBar.classList.add('fade'), 1500);
+};
+
 const writeToClipboard = targetNode => {
   if (isTargetBeingDeleted(targetNode.parentNode.parentNode)) {
     return;
   }
 
   navigator.clipboard.writeText(targetNode.textContent);
-  if (targetNode.parentNode.firstChild.innerText !== '1')
+  if (targetNode.parentNode.firstChild.innerText !== '1') {
+    setProcessingStatus('Copying..');
     bumpElementToTheTopOfTheList(targetNode.parentNode.parentNode, targetNode);
+  } else {
+    setProcessCompleteStatus('Copied!');
+  }
 };
 
 const eraseItemFromSelectionList = (selectionList, e, text) => {
@@ -89,6 +133,7 @@ const eraseItemFromSelectionList = (selectionList, e, text) => {
     return;
   }
 
+  setProcessingStatus('Removing..');
   e.target.parentNode.classList.add('deleted');
   setTimeout(
     () => removeElementAndUpdateNumbers(selectionList, e.target.parentNode),
@@ -138,6 +183,8 @@ const removeElementAndUpdateNumbers = (selectionList, element) => {
   selectionList.childNodes.forEach(
     (element, index) => (element.firstChild.innerText = index + 1)
   );
+
+  setProcessCompleteStatus('Removed!');
 };
 
 const removeAndAddElementAndUpdateNumbers = (
@@ -150,4 +197,6 @@ const removeAndAddElementAndUpdateNumbers = (
   selectionList.childNodes.forEach(
     (element, index) => (element.firstChild.innerText = index + 1)
   );
+
+  setProcessCompleteStatus('Copied!');
 };

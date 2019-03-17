@@ -18,14 +18,17 @@
       <div id="leftMenu" class="menu-segment menu-segment-left">
         <i
           id="scrollToTop"
-          class="fas fa-arrow-up fa-lg"
+          class="fas fa-arrow-up fa-lg clickable"
           title="Scroll to top"
         ></i>
       </div>
       <div id="centerMenu" class="menu-segment menu-segment-center">
-        <i id="settings" class="fas fa-cog fa-lg" title="Options"></i>
+        <i id="settings" class="fas fa-cog fa-lg clickable" title="Options"></i>
       </div>
-      <div id="rightMenu" class="menu-segment menu-segment-right"></div>
+      <div id="rightMenu" class="menu-segment menu-segment-right">
+        <div id="statusBar" class="status fade">
+        </div>
+      </div>
     </div>
     <ul id="selectionList"></ul>
     <script src="popup.js"></script>
