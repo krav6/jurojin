@@ -14,12 +14,11 @@ class StatusHandler {
 
     const spinnerIcon = document.createElement('i');
     spinnerIcon.classList.add(
-      'fas',
-      'fa-spinner',
-      'fa-lg',
+      'material-icons',
       'status-icon',
       'spinner'
     );
+    spinnerIcon.innerText = 'sync';
 
     const statusBar = document.getElementById('statusBar');
     statusBar.innerText = msg;
@@ -30,7 +29,8 @@ class StatusHandler {
     StatusHandler.clearStatus();
 
     const checkIcon = document.createElement('i');
-    checkIcon.classList.add('fas', 'fa-check', 'status-icon');
+    checkIcon.classList.add('material-icons', 'status-icon');
+    checkIcon.innerText = 'check';
 
     const statusBar = document.getElementById('statusBar');
     statusBar.innerText = msg;

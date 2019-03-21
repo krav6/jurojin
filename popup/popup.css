@@ -144,6 +144,12 @@ i.spinner {
 .menu-segment-right {
   justify-content: flex-end;
   color: #36b902;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .number {
@@ -158,6 +164,7 @@ i.spinner {
 }
 
 .status {
+  display: flex;
   padding: 5px;
   margin-right: 10px;
   opacity: 1;

@@ -38,7 +38,8 @@ const generateListElementCloseIcon = (
   eraseItemFromSelectionList
 ) => {
   const i = document.createElement('i');
-  i.classList.add('fas', 'fa-times', 'fa-lg', 'clickable');
+  i.classList.add('material-icons', 'clickable');
+  i.innerText = 'close';
   i.onclick = e => eraseItemFromSelectionList(e, text);
 
   return i;
