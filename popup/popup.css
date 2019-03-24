@@ -5,6 +5,8 @@ body {
   line-height: 24px;
   font-weight: 300;
   margin: 0;
+  position: relative;
+  width: 100%;
 }
 
 ul {
@@ -42,7 +44,7 @@ li.bump-deleted {
   transform: translateY(-100%);
 }
 
-p {
+p.list-element {
   width: 300px;
   margin: 0px;
   padding: 10px;
@@ -120,7 +122,7 @@ i.spinner {
   flex-shrink: 1;
   flex-basis: 0;
   position: sticky;
-  z-index: 9999;
+  z-index: 5000;
   top: 0;
   background-color: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -155,6 +157,9 @@ i.spinner {
 .number {
   padding: 5px;
   margin: 5px;
+}
+
+.no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -176,4 +181,64 @@ i.spinner {
 
 .status.fade {
   opacity: 0;
+}
+
+.modal {
+  z-index: 9999;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 75%;
+  height: 150px;
+  background-color: rgba(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 10px 2px #d1d1d1;
+  top: 50px;
+  left: 12.5%;
+}
+
+.modal-message {
+  margin: 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-flow: row;
+}
+
+.modal-button {
+  margin: 10px;
+  padding: 5px;
+  width: 75px;
+  height: 30px;
+  border-radius: 5px;
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  outline: none;
+}
+
+.modal-button-danger {
+  background-color: rgba(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.modal-button-danger:hover {
+  background-color: #323439;
+  color: white;
+}
+
+.modal-button-cancel {
+  background: none;
+  border: none;
+}
+
+.modal-button-cancel:hover {
+  border: 1px solid rgba(0, 0, 0, 0.25);
 }

@@ -14,6 +14,16 @@ window.onload = () => {
   );
 
   menuBar = new MenuBar();
+
+  document.body.onclick = e => {
+    if (
+      !e.target.closest('.modal') &&
+      !e.target.classList.contains('modal-open')
+    ) {
+      const modals = document.getElementsByClassName('modal');
+      Array.prototype.forEach.call(modals, element => element.remove());
+    }
+  };
 };
 
 const handleKeyDown = (e, selectionList) => {

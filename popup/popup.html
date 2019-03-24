@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="popup.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Lato"
@@ -15,14 +18,22 @@
           id="scrollToTop"
           class="material-icons clickable"
           title="Scroll to top"
-        >arrow_upward</i>
+          >arrow_upward</i
+        >
+        <i
+          id="deleteAll"
+          class="material-icons clickable modal-open"
+          title="Delete all elements"
+          >delete</i
+        >
       </div>
       <div id="centerMenu" class="menu-segment menu-segment-center">
-        <i id="settings" class="material-icons clickable" title="Options">settings</i>
+        <i id="settings" class="material-icons clickable" title="Options"
+          >settings</i
+        >
       </div>
-      <div id="rightMenu" class="menu-segment menu-segment-right">
-        <div id="statusBar" class="status fade">
-        </div>
+      <div id="rightMenu" class="menu-segment menu-segment-right no-select">
+        <div id="statusBar" class="status fade"></div>
       </div>
     </div>
     <ul id="selectionList"></ul>
