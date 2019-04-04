@@ -7,7 +7,7 @@ const saveOptions = () => {
 };
 
 const restoreOptions = () => {
-  chrome.storage.sync.get(
+  chrome.storage.local.get(
     'clipboardSync',
     data =>
       (document.getElementById('clipboardSync').value = data.clipboardSync)

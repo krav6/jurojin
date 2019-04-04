@@ -3,7 +3,7 @@ document.addEventListener('copy', () => {
     return;
   }
 
-  chrome.storage.sync.get('clipboardSync', data => {
+  chrome.storage.local.get('clipboardSync', data => {
     if (data.clipboardSync === 'browser') {
       chrome.runtime.sendMessage({
         selection: window.getSelection().toString()

@@ -1,5 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.sync.set({
+  chrome.storage.local.set({
     clipboard: [
       'Thanks for using Jurojin!',
       'Press Ctrl+Shift+A (or Command+Shift+A on a Mac) to toggle this window.',
@@ -16,7 +16,7 @@ const updateClipboardStorage = content => {
     return;
   }
 
-  chrome.storage.sync.get(['clipboard', 'latestElement'], data => {
+  chrome.storage.local.get(['clipboard', 'latestElement'], data => {
     if (data.latestElement === content) {
       return;
     }
@@ -31,7 +31,7 @@ const updateClipboardStorage = content => {
           ]
         : [content, ...data.clipboard];
 
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
       clipboard,
       latestElement: content
     });
@@ -48,20 +48,20 @@ const getContentFromClipboard = () => {
 };
 
 const handleOptionsChanged = options => {
-  chrome.storage.sync.set(
+  chrome.storage.local.set(
     {
       clipboardSync: options.clipboardSync
     },
     () => {
-      chrome.storage.sync.get('intervalId', data => {
+      chrome.storage.local.get('intervalId', data => {
         if (options.clipboardSync == 'system' && !data.intervalId) {
           const intervalId = setInterval(getContentFromClipboard, 500);
-          chrome.storage.sync.set({
+          chrome.storage.local.set({
             intervalId
           });
         } else if (options.clipboardSync == 'browser' && data.intervalId) {
           clearInterval(data.intervalId);
-          chrome.storage.sync.set({
+          chrome.storage.local.set({
             intervalId: null
           });
         }
@@ -70,7 +70,7 @@ const handleOptionsChanged = options => {
   );
 };
 
-const handleSyncRequest = msg => chrome.storage.sync.set(msg.dataToSync);
+const handleSyncRequest = msg => chrome.storage.local.set(msg.dataToSync);
 
 chrome.runtime.onMessage.addListener((msg, sender) => {
   switch (sender.url) {

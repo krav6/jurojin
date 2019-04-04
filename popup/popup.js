@@ -5,7 +5,7 @@ let clipboardList = null;
 let menuBar = null; //eslint-disable-line no-unused-vars
 
 window.onload = () => {
-  chrome.storage.sync.get('clipboard', data => {
+  chrome.storage.local.get('clipboard', data => {
     clipboardList = new ClipboardList(data.clipboard);
   });
 

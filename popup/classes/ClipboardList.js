@@ -51,7 +51,7 @@ class ClipboardList {
       () => this.removeElementAndUpdateNumbers(e.target.parentNode),
       300
     );
-    chrome.storage.sync.get('clipboard', data => {
+    chrome.storage.local.get('clipboard', data => {
       const index = data.clipboard.indexOf(text);
       if (index === -1) {
         return;
@@ -83,7 +83,7 @@ class ClipboardList {
         ),
       300
     );
-    chrome.storage.sync.get('clipboard', data => {
+    chrome.storage.local.get('clipboard', data => {
       const index = data.clipboard.indexOf(element.textContent);
       if (index === -1) {
         return;
